@@ -1,0 +1,20 @@
+{
+    "name": "microservices-consul",
+    "version": "1.0.0",
+    "description": "Microservicios con Consul Service Discovery",
+    "main": "index.js",
+    "scripts": {
+        "start:consul": "docker run -d --name consul -p 8500:8500 -p 8600:8600/udp consul:1.15 consul agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0 -bind=0.0.0.0",
+        "start:usuarios": "node servicio-usuarios.js",
+        "start:pedidos": "node servicio-pedidos.js",
+        "dev": "concurrently \"npm run start:usuarios\" \"npm run start:pedidos\""
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "axios": "^1.4.0",
+        "consul": "^0.40.0"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.0"
+    }
+}
